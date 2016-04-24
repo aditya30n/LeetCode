@@ -38,3 +38,32 @@ public class Solution {
         return inOrder;
     }
 }
+ 
+// Iterative
+public class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> inOrder = new ArrayList<>();
+        if(root == null)
+            return inOrder;
+            
+        TreeNode current = root;
+        Stack stack = new Stack(); 
+        stack.push(current);
+        
+        while(!stack.isEmpty()){
+            while(current != null){
+                current = current.left;
+                stack.push(current);
+            }
+            
+            current = (TreeNode)stack.pop();
+            if(current != null){
+                inOrder.add(current.val);
+                stack.push(current.right);
+                current = current.right;
+            }
+        }
+        
+        return inOrder;
+    }
+}
