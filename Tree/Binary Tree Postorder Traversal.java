@@ -39,3 +39,48 @@ public class Solution {
         return postOrder;
     }
 }
+
+
+//Iterative
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if (root == null)
+            return list;
+            
+        TreeNode node = root;
+        Stack<TreeNode> S = new Stack<TreeNode>();
+        S.push(node);
+        TreeNode prev = null;
+        while (!S.isEmpty()) {
+            TreeNode current = S.peek();
+ 
+            if (prev == null || prev.left == current || prev.right == current) {
+                if (current.left != null) {
+                    S.push(current.left);
+                } else if (current.right != null) {
+                    S.push(current.right);
+                } else {
+                    S.pop();
+                    list.add(current.val);
+                }
+ 
+            } else if (current.left == prev) {
+                if (current.right != null) {
+                    S.push(current.right);
+                } else {
+                    S.pop();
+                    list.add(current.val);
+                }
+
+            } else if (current.right == prev) {
+                S.pop();
+                list.add(current.val);
+            }
+ 
+            prev = current;
+        }
+      return list;
+    }
+      
+}
