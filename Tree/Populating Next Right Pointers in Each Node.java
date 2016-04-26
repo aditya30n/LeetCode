@@ -29,8 +29,6 @@ After calling your function, the tree should look like:
     4->5->6->7 -> NULL
 */
 
-
-// BFS Solution
 /**
  * Definition for binary tree with next pointer.
  * public class TreeLinkNode {
@@ -39,6 +37,22 @@ After calling your function, the tree should look like:
  *     TreeLinkNode(int x) { val = x; }
  * }
  */
+ 
+//Recursion
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if(root == null)
+            return;
+        if(root.left != null)
+            root.left.next = root.right;
+        if(root.right != null && root.next != null)
+            root.right.next = root.next.left;
+        connect(root.left);
+        connect(root.right);
+    }
+}
+ 
+ // BFS Solution
 public class Solution {
     public void connect(TreeLinkNode root) {
         List<TreeLinkNode> currentLevel = new ArrayList<>();
