@@ -27,7 +27,7 @@ return its zigzag level order traversal as:
  * }
  */
  
- //Iterative solution
+ //Using Stack
 public class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> out = new ArrayList<>();
@@ -68,4 +68,50 @@ public class Solution {
         
         return out;
     }
+}
+
+
+//Using Queue
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> out = new ArrayList<>();
+        if(root == null)
+            return out;
+        
+        List<Integer> level;
+        Queue<TreeNode> current = new LinkedList<>();
+        Queue<TreeNode> next;
+        current.add(root);
+        boolean flag = true;
+        while(!current.isEmpty()){
+            next = new LinkedList<>();
+            level = new ArrayList<>();
+            while(!current.isEmpty()){
+                TreeNode temp = current.remove();
+                level.add(temp.val);
+                if(temp.left != null)
+                    next.add(temp.left);
+                if(temp.right != null)
+                    next.add(temp.right);
+            }
+            
+            if(flag)
+                out.add(level);
+            else
+                out.add(reverseList(level));
+            flag = !flag;
+            current = next;
+        }
+        
+        
+        return out;
+    }
+    
+    private List<Integer> reverseList(List<Integer> myList) {
+    List<Integer> invertedList = new ArrayList<>();
+    for (int i = myList.size() - 1; i >= 0; i--) {
+            invertedList.add(myList.get(i));
+    }
+    return invertedList;
+}
 }
