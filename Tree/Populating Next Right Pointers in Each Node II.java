@@ -17,6 +17,33 @@ You may only use constant extra space.
  * }
  */
  
+ // Fast approvach
+ public class Solution {
+    public void connect(TreeLinkNode root) {
+        while(root != null){
+            TreeLinkNode current = root;
+            while(current != null){
+                if(current.left != null && current.right != null){
+                    current.left.next = current.right;
+                    current.right.next = getNextLevelFirst(current.next);
+                }
+                else if(current.left != null || current.right != null){
+                    getNextLevelFirst(current).next = getNextLevelFirst(current.next);
+                }
+                current = current.next;
+            }
+            root = getNextLevelFirst(root);
+        }
+    }
+    
+    public TreeLinkNode getNextLevelFirst(TreeLinkNode root){
+        if(root == null) return null;
+        else if(root.left != null) return root.left;
+        else if(root.right != null) return root.right;
+        else return getNextLevelFirst(root.next);
+    }
+}
+ 
  // Using Queue
 public class Solution {
     public void connect(TreeLinkNode root) {
