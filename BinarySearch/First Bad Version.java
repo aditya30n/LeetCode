@@ -15,12 +15,11 @@ public class Solution extends VersionControl {
     }
     
     private int firstBadVersion(int start, int end) {
+        if(start == end)
+            return start;
         int mid = start + (end - start)/2;
-        if(isBadVersion(mid)){
-            if(mid > 0 && isBadVersion(mid-1))
-                return firstBadVersion(start, mid-1);   
-            return mid;
-        }
+        if(isBadVersion(mid))
+            return firstBadVersion(start, mid);
         return firstBadVersion(mid + 1, end);
     }
 }
