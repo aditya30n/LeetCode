@@ -12,10 +12,17 @@ return 5.
 
 public class Solution {
     public int lengthOfLastWord(String s) {
-        s = s.trim();
-        int last = 0;
-        for(int i =s.length()-1; i>=0 && s.charAt(i) != ' '; i--)
+       int last = 0;
+        for(int i =s.length()-1; i>=0; i--){
+            if(s.charAt(i) == ' '){
+                if(last == 0)
+                    continue;
+                else
+                    break;
+            }
             last++;
+        }
+            
         return last;
     }
 }
