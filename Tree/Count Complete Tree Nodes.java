@@ -14,6 +14,8 @@ In a complete binary tree every level, except possibly the last, is completely f
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
+ //T(n)=T(n/2)+O(log(n)) => O(log(n)*log(n)) == O(h^2)
 public class Solution {
     public int countNodes(TreeNode root) {
         if(root == null)
