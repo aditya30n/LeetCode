@@ -29,7 +29,7 @@ public class Solution {
         }
         
         if(left == null && right == null)
-            return (int)Math.pow(2, height)-1;
+            return (1<<height)-1;
         
         return 1 + countNodes(root.left) + countNodes(root.right);
     }
