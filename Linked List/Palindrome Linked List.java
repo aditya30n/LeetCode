@@ -11,6 +11,9 @@ Given a singly linked list, determine if it is a palindrome.
  * }
  */
  
+ // Use of stack and compare
+ 
+ //Use of reverse linked list
 public class Solution {
     public boolean isPalindrome(ListNode head) {
         if(head == null || head.next == null)
@@ -43,5 +46,27 @@ public class Solution {
         node.next.next = node;
         node.next = null;
         return rest;
+    }
+}
+
+//Recursion
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        left = head;
+        return isPalindromeUtil(head);
+    }
+    
+    ListNode left;
+    
+    private boolean isPalindromeUtil(ListNode right) {
+        if(right == null)
+            return true;
+        
+        if(!isPalindromeUtil(right.next))
+            return false;
+            
+        boolean isPal = left.val == right.val;
+        left = left.next;
+        return isPal;
     }
 }
