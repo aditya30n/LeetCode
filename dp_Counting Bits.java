@@ -19,12 +19,7 @@ Or does the odd/even status of the number help you in calculating the number of 
 public class Solution {
     public int[] countBits(int num) {
         int[] count = new int[num+1];
-        int[] temp = {0,1,1,2};
         int i = 0;
-        while(i < 4 && i <= num){
-            count[i] = temp[i];
-            i++;
-        }         
         
         while (i <= num){
             count[i] = count[i>>1] + i % 2;
