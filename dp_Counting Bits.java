@@ -18,13 +18,19 @@ Or does the odd/even status of the number help you in calculating the number of 
 
 public class Solution {
     public int[] countBits(int num) {
-        int[] count = new int[num+1];
-        int i = 0;
+        int[] dp = new int[num+1];
+        dp[0] = 0;  if(num == 0)return dp;
+        dp[1] = 1;  if(num == 1)return dp;
         
-        while (i <= num){
-            count[i] = count[i>>1] + i % 2;
-            i++;
+        int prev = 1;
+        for(int i=2; i<= num; i++){
+            if(i == prev << 1){
+                prev = i;
+                dp[i] = 1;
+                continue;
+            }
+            dp[i] = 1 + dp[i-prev];
         }
-        return count;
+        return dp;
     }
 }
